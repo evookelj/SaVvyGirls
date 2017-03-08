@@ -5,6 +5,7 @@ var b = document.getElementById("clear");
 var move = document.getElementById("move");
 var rid;
 
+//change circle color upon click
 var change = function(e) {
 	if (this.getAttribute("fill")=="red") {
 		svg.appendChild(makeCirc(Math.random()*width, Math.random()*height));
@@ -15,6 +16,7 @@ var change = function(e) {
 	e.stopPropagation();
 };
 
+//make circle at x,y
 var makeCirc = function(x,y) {
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	c.setAttribute("cx", x);
@@ -27,6 +29,7 @@ var makeCirc = function(x,y) {
 	return c;
 };
 
+//add a circle to svg
 var addCirc = function(e) {
 	console.log("SVG");
 	if (this == e.target) {
@@ -34,21 +37,25 @@ var addCirc = function(e) {
 	}
 };
 
+//clear screen
 var clear = function(e) {
 	while (svg.hasChildNodes()) {
 		svg.removeChild(svg.lastChild);
 	}
 };
 
+//animate / 'move' button
 var anim = function(e){
 	window.cancelAnimationFrame( rid );
-
+ 
 	var bounce = function() {
 		var circs = document.getElementsByTagName("circle")
-		for (var i=0; i<circs.length; i++) {
+		for (var i=0; i<circs.length; i++) { //for all circles
 			var curx = circs[i].getAttribute("cx");
 			var cury = circs[i].getAttribute("cy");
 			var r = circs[i].getAttribute("r");
+
+			//adjust x/y accordingly based on boundaries
 			if ((curx > width-r) || (curx<0)) { 
 				curx--; 
 			} else {
@@ -60,9 +67,12 @@ var anim = function(e){
 			} else {
 				cury++;
 			}
+
+			//change circle positions
 			circs[i].setAttribute("cx",curx);
 			circs[i].setAttribute("cy",cury);
 		}
+		//animate!
 		rid = window.requestAnimationFrame(bounce);
 	}
 	bounce();

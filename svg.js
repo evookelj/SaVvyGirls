@@ -41,42 +41,32 @@ var clear = function(e) {
 };
 
 var anim = function(e){
-	var oneAnim = function(circ) {
-		var xvol = 1;
-    	var yvol = 1;
-    	window.cancelAnimationFrame( rid );
+	window.cancelAnimationFrame( rid );
 
-    	var bounce = function(circ) {
-    		console.log("A: ");
-    		console.log(circ);
-    		console.log(circ.getAttribute("r"));
-    		console.log();
-    		var curx = parseInt(circ.getAttribute("cx"));
-			var cury = parseInt(circ.getAttribute("cy"));
-			if ((curx>=width-parseInt(circ.getAttribute("r"))) || (curx==0)) {
-	    		xvol *= -1;
+	var bounce = function() {
+		var circs = document.getElementsByTagName("circle")
+		for (var i=0; i<circs.length; i++) {
+			var curx = circs[i].getAttribute("cx");
+			var cury = circs[i].getAttribute("cy");
+			var r = circs[i].getAttribute("r");
+			if ((curx > width-r) || (curx<0)) { 
+				curx--; 
+			} else {
+				curx++;
 			}
-			console.log("B: ");
-    		console.log(circ);
-			if ((cury>=height-parseInt(circ.getAttribute("r"))) || (cury==0)) {
-	    		yvol *= -1;
-			}
-			console.log("C: ");
-    		console.log(circ);
-			circ.setAttribute("cx", curx+xvol);
-			circ.setAttribute("cy", cury+yvol);
-			rid = window.requestAnimationFrame( bounce );
-			console.log();
-    	}
-    	bounce(circ);
-	}
 
-	var circs = svg.childNodes;
-	for (var i=1; i<circs.length; i++) {
-		console.log("NEXT");
-		oneAnim(circs[i]);
-		console.log("\n");
+			if ((cury > height-r) || (cury < 0)) {
+				curx--;
+			} else {
+				cury++;
+			}
+			circs[i].setAttribute("cx",curx);
+			circs[i].setAttribute("cy",cury);
+		}
+		rid = window.requestAnimationFrame(bounce);
 	}
+	bounce();
+
 };
 
 svg.addEventListener('click', addCirc);

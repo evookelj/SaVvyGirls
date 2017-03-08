@@ -25,7 +25,7 @@ var makeCirc = function(x,y) {
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	c.setAttribute("cx", x);
 	c.setAttribute("cy", y);
-	c.setAttribute("r", Math.random()*50);
+	c.setAttribute("r", (Math.random()*50)+5);
 	c.setAttribute("fill", "aliceblue");
 	c.setAttribute("stroke", "black");
 	c.addEventListener('click', change);

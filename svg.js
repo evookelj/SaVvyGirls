@@ -19,7 +19,7 @@ var makeCirc = function(x,y) {
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 	c.setAttribute("cx", x);
 	c.setAttribute("cy", y);
-	c.setAttribute("r", (Math.random()*50)+5);
+	c.setAttribute("r", (Math.random()*30)+20);
 	c.setAttribute("fill", "aliceblue");
 	c.setAttribute("stroke", "black");
 	c.addEventListener('click', change);
@@ -47,7 +47,7 @@ var anim = function(e){
     	window.cancelAnimationFrame( rid );
 
     	var bounce = function(circ) {
-    		console.log("CIRCLE: ");
+    		console.log("A: ");
     		console.log(circ);
     		console.log(circ.getAttribute("r"));
     		console.log();
@@ -56,19 +56,26 @@ var anim = function(e){
 			if ((curx>=width-parseInt(circ.getAttribute("r"))) || (curx==0)) {
 	    		xvol *= -1;
 			}
+			console.log("B: ");
+    		console.log(circ);
 			if ((cury>=height-parseInt(circ.getAttribute("r"))) || (cury==0)) {
 	    		yvol *= -1;
 			}
+			console.log("C: ");
+    		console.log(circ);
 			circ.setAttribute("cx", curx+xvol);
 			circ.setAttribute("cy", cury+yvol);
 			rid = window.requestAnimationFrame( bounce );
+			console.log();
     	}
     	bounce(circ);
 	}
 
 	var circs = svg.childNodes;
 	for (var i=1; i<circs.length; i++) {
-		while (true) { oneAnim(circs[i]); }
+		console.log("NEXT");
+		oneAnim(circs[i]);
+		console.log("\n");
 	}
 };
 

@@ -49,6 +49,8 @@ var anim = function(e){
     	var bounce = function(circ) {
     		console.log("CIRCLE: ");
     		console.log(circ);
+    		console.log(circ.getAttribute("r"));
+    		console.log();
     		var curx = parseInt(circ.getAttribute("cx"));
 			var cury = parseInt(circ.getAttribute("cy"));
 			if ((curx>=width-parseInt(circ.getAttribute("r"))) || (curx==0)) {
@@ -66,7 +68,7 @@ var anim = function(e){
 
 	var circs = svg.childNodes;
 	for (var i=1; i<circs.length; i++) {
-		oneAnim(circs[i]);
+		while (true) { oneAnim(circs[i]); }
 	}
 };
 

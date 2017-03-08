@@ -2,12 +2,24 @@ var svg = document.getElementById("vimage");
 var height = vimage.getAttribute("height");
 var width = vimage.getAttribute("width");
 var b = document.getElementById("clear");
+var move = document.getElementById("move");
 
 var change = function(e) {
+	if (this.getAttribute("fill")=="red") {
+		svg.appendChild(makeCirc(Math.random()*width, Math.random()*height));
+		console.log("Removing!");
+		svg.removeChild(this);
+		return ;
+	}
 	console.log("circ");
 	this.setAttribute("fill", "red");
 	e.stopPropagation();
 };
+
+var randCirc = function(e) {
+	if (e.target.getAttribute("fill")=="red" && this.tagName=="svg") {
+	}
+}
 
 var makeCirc = function(x,y) {
 	var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -34,5 +46,10 @@ var clear = function(e) {
 	}
 };
 
+var anim = function(e){
+
+};
+
 svg.addEventListener('click', addCirc);
 b.addEventListener('click', clear);
+move.addEventListener('click', anim);

@@ -64,7 +64,7 @@ var anim = function(e){
 	    //adjust x/y accordingly based on boundaries
 	    if (curx >= width-r || curx <= r) { 
 		circ.setAttribute("xvol",xvol*-1);
-		console.log("ID: " + i + " Xcor: " + circ.getAttribute("xvol"));
+		//console.log("ID: " + i + " Xcor: " + circ.getAttribute("xvol"));
 	    }
 	    
 	    if (cury >= height-r || cury <= r) {

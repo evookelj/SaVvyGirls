@@ -60,16 +60,12 @@ var anim = function(e){
 	    var r = parseInt(circs[i].getAttribute("r"));
 
 	    //adjust x/y accordingly based on boundaries
-	    if (curx > width-r) { 
-		circs[i].setAttribute("xvol",-1);
-	    }else if (curx <= 0){
-		circs[i].setAttribute("xvol",1);
+	    if (curx > width-r || curx <= r) { 
+		circs[i].setAttribute("xvol",yvol*-1);
 	    }
-
-	    if (cury > height-r) {
-		circs[i].setAttribute("yvol",-1);
-	    }else if (cury <= 0) {
-		circs[i].setAttribute("yvol",1);
+	    
+	    if (cury > height-r || cury <= r) {
+		circs[i].setAttribute("yvol", xvol*-1);
 	    }
 
 	    console.log(xvol);

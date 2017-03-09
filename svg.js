@@ -51,33 +51,37 @@ var anim = function(e){
     window.cancelAnimationFrame( rid );
     
     var bounce = function() {
-	var circs = document.getElementsByTagName("circle")
+	var circs = document.getElementsByTagName("circle");
 	for (var i=0; i<circs.length; i++) { //for all circles
-	    var curx = parseInt(circs[i].getAttribute("cx"));
-	    var cury = parseInt(circs[i].getAttribute("cy"));
-	    var xvol = parseInt(circs[i].getAttribute("xvol"));
-	    var yvol = parseInt(circs[i].getAttribute("yvol"));
-	    var r = parseInt(circs[i].getAttribute("r"));
+	    var circ = circs[i];
+
+	    var curx = parseInt(circ.getAttribute("cx"));
+	    var cury = parseInt(circ.getAttribute("cy"));
+	    var xvol = parseInt(circ.getAttribute("xvol"));
+	    var yvol = parseInt(circ.getAttribute("yvol"));
+	    var r = parseInt(circ.getAttribute("r"));
 
 	    //adjust x/y accordingly based on boundaries
-	    if (curx > width-r || curx <= r) { 
-		circs[i].setAttribute("xvol",yvol*-1);
+	    if (curx >= width-r || curx <= r) { 
+		circ.setAttribute("xvol",xvol*-1);
+		console.log("ID: " + i + " Xcor: " + circ.getAttribute("xvol"));
 	    }
 	    
-	    if (cury > height-r || cury <= r) {
-		circs[i].setAttribute("yvol", xvol*-1);
+	    if (cury >= height-r || cury <= r) {
+		circ.setAttribute("yvol", yvol*-1);
 	    }
 
-	    console.log(xvol);
-	    console.log(yvol);
-	    console.log(r);
-	    console.log("\n");
-	    console.log("\n");
-	    curx += xvol;
-	    cury += yvol;
+	    //shoutout to klau to help with debugging
+	    //console.log(xvol);
+	    //console.log(yvol);
+	   // console.log(r);
+	    //console.log("\n");
+	    //console.log("\n");
+	    curx += parseInt(circ.getAttribute("xvol"));
+	    cury += parseInt(circ.getAttribute("yvol"));
 	    //change circle positions
-	    circs[i].setAttribute("cx",curx);
-	    circs[i].setAttribute("cy",cury);
+	    circ.setAttribute("cx",curx);
+	    circ.setAttribute("cy",cury);
 	}
 	//animate!
 	rid = window.requestAnimationFrame(bounce);

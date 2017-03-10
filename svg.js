@@ -63,28 +63,25 @@ var anim = function(e){
 
 	    //adjust x/y accordingly based on boundaries
 	    if (curx == width/2){
-		/*
-		if (r <= 10){
-		    svg.removeChild();
-		}
-		*/
-		circ.setAttribute("r",r/2);
-		console.log(circs.length);
-		var newDot = makeCirc(curx+xvol*-1,cury+yvol*-1,r/2);
-		//console.log(newDot);
-		newDot.setAttribute("xvol", xvol*-1);
-		newDot.setAttribute("yvol", yvol*-1);
-		svg.appendChild(newDot);
+			circ.setAttribute("r",r/2);
+			var newDot = makeCirc(curx+xvol*-1,cury, r/2);
+			newDot.setAttribute("xvol", xvol*-1);
+			newDot.setAttribute("yvol", yvol*-1);
+			svg.appendChild(newDot);
+	    }
+
+	    if (r <= 2) {
+	    	svg.removeChild(circ);
 	    }
 
 	    
 	    if (curx >= width-r || curx <= r) { 
-		circ.setAttribute("xvol",xvol*-1);
+			circ.setAttribute("xvol",xvol*-1);
 		//console.log("ID: " + i + " Xcor: " + circ.getAttribute("xvol"));
 	    }
 	    
 	    if (cury >= height-r || cury <= r) {
-		circ.setAttribute("yvol", yvol*-1);
+			circ.setAttribute("yvol", yvol*-1);
 	    }
 
 	    //shoutout to klau to help with debugging

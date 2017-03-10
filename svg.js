@@ -8,7 +8,7 @@ var rid;
 //change circle color upon click
 var change = function(e) {
     if (this.getAttribute("fill")=="red") {
-	svg.appendChild(makeCirc(Math.random()*width, Math.random()*height));
+	svg.appendChild(makeCirc(Math.random()*width, Math.random()*height,40));
 	svg.removeChild(this);
 	return ;
     }
@@ -17,11 +17,11 @@ var change = function(e) {
 };
 
 //make circle at x,y
-var makeCirc = function(x,y) {
+var makeCirc = function(x,y,r) {
     var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     c.setAttribute("cx", x);
     c.setAttribute("cy", y);
-    c.setAttribute("r", (Math.random()*30)+20);
+    c.setAttribute("r", r);
     c.setAttribute("fill", "aliceblue");
     c.setAttribute("stroke", "black");
     c.setAttribute("xvol", 1);
@@ -35,7 +35,7 @@ var makeCirc = function(x,y) {
 var addCirc = function(e) {
     console.log("SVG");
     if (this == e.target) {
-	svg.appendChild(makeCirc(e.offsetX, e.offsetY));
+	svg.appendChild(makeCirc(e.offsetX, e.offsetY,40));
     }
 };
 
@@ -62,6 +62,16 @@ var anim = function(e){
 	    var r = parseInt(circ.getAttribute("r"));
 
 	    //adjust x/y accordingly based on boundaries
+	    if (curx == width/2){
+		circ.setAttribute("r",r/2);
+		console.log(circs.length);
+		var newDot = makeCirc(curx+xvol*-1,cury+yvol*-1,r/2);
+		console.log(newDot);
+		newDot.setAttribute("xvol", xvol*-1);
+		newDot.setAttribute("yvol", yvol*-1);
+		svg.appendChild(newDot);
+	    }
+	    
 	    if (curx >= width-r || curx <= r) { 
 		circ.setAttribute("xvol",xvol*-1);
 		//console.log("ID: " + i + " Xcor: " + circ.getAttribute("xvol"));

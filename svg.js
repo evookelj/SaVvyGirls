@@ -63,14 +63,20 @@ var anim = function(e){
 
 	    //adjust x/y accordingly based on boundaries
 	    if (curx == width/2){
+		/*
+		if (r <= 10){
+		    svg.removeChild();
+		}
+		*/
 		circ.setAttribute("r",r/2);
 		console.log(circs.length);
 		var newDot = makeCirc(curx+xvol*-1,cury+yvol*-1,r/2);
-		console.log(newDot);
+		//console.log(newDot);
 		newDot.setAttribute("xvol", xvol*-1);
 		newDot.setAttribute("yvol", yvol*-1);
 		svg.appendChild(newDot);
 	    }
+
 	    
 	    if (curx >= width-r || curx <= r) { 
 		circ.setAttribute("xvol",xvol*-1);
